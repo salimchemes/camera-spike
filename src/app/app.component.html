@@ -3,14 +3,21 @@
     <div>
       capture image spike
     </div>
+    <div *ngIf="loadingCamera">camera is starting ...</div>
     <div class="p-1">
       <video #video class="vid" autoplay></video>
     </div>
     <div class="pb-2">
+      <button class="btn btn-primary mr-1" (click)="startCamera()">
+        Start Camera
+      </button>
       <button class="btn btn-primary mr-1" (click)="capture()">
         Capture Image
       </button>
-      <button class="btn btn-secondary" (click)="clean()">Clean Image</button>
+
+      <button class="btn btn-secondary" (click)="clean()">
+        Clean Image
+      </button>
     </div>
     <div class="p-1">
       <canvas #canvas class="vid"></canvas>

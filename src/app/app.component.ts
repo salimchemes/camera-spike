@@ -14,7 +14,7 @@ import {
 export class AppComponent implements OnInit {
   @ViewChild("video", { static: true }) videoElement: ElementRef;
   @ViewChild("canvas", { static: true }) canvas: ElementRef;
-
+  loadingCamera: boolean;
   videoWidth = 0;
   videoHeight = 0;
   constraints = {
@@ -27,11 +27,11 @@ export class AppComponent implements OnInit {
 
   constructor(private renderer: Renderer2) {}
 
-  ngOnInit() {
-    this.startCamera();
-  }
+  ngOnInit() {}
 
   startCamera() {
+    this.loadingCamera = true;
+
     if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
       navigator.mediaDevices
         .getUserMedia(this.constraints)
@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
     this.renderer.listen(this.videoElement.nativeElement, "play", (event) => {
       this.videoHeight = this.videoElement.nativeElement.videoHeight;
       this.videoWidth = this.videoElement.nativeElement.videoWidth;
+      this.loadingCamera = false;
     });
   }
 
